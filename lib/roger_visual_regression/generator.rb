@@ -7,7 +7,7 @@ require 'roger/cli/command'
 require 'roger/generators'
 
 module RogerVisualRegression
-  class Initializer < Roger::Generators::Base
+  class Generator < Roger::Generators::Base
     include Thor::Actions
 
     desc "Creates base spec files for visual regression"
@@ -80,4 +80,4 @@ module RogerVisualRegression
   end
 end
 
-Roger::Generators.register RogerVisualRegression::Initializer
+Roger::Generators.register :visual_regression, RogerVisualRegression::Initializer

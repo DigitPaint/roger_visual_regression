@@ -1,4 +1,6 @@
-module RogerVisualRegression::Commands
+require 'roger/test'
+
+module RogerVisualRegression
   class Runner
     def initialize options={}
       check_specifications_exists options
