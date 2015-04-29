@@ -1,8 +1,18 @@
 # RogerVisualRegression
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/roger_visual_regression`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem exists of two commands: a generator and a test. The generator creates for every .html(.erb) files in the project a spec file. This spec files is very simple, it visits the page and it should match the expectation:
 
-TODO: Delete this and the text above, and describe your gem
+```ruby
+describe "Base test for index.html.erb", :type => :feature, :js => true do
+  before(:each) do
+    visit "http://localhost:9000/index.html"
+    sleep 2
+  end
+  it { expect(page).to match_expectation } 
+end    
+```
+
+When there's no expectation, it will save screenshots to a temporary folder. You should manually move these screenshots next to the specs. When running te test again, it will match against these screenshots.
 
 ## Installation
 
@@ -22,7 +32,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This gem exists of two commands: a generator and a test-command.
+
+### Generating base specs
+
+    $ bundle exec roger generate rogervisualregression::
+
+### Test it!
+
+First add the following block to you Mockupfile
+
+```ruby
+mockup.test do |test|
+  test.use :visual_regression, {spec_path: 'spec/'}
+end    
+```
+
+Then run the command on the commandline:
+    
+    $ bundle exec roger test
+
+When this is the first time you run this command, the screenshots can be found at: `tmp/spec/expectation/**/test.png`. Copy the expectation folder to your spec path:
+
+    $ mv tmp/spec/expectation spec/expectation && find ./spec/expectation -iname "test.png" -exec bash -c 'mv $0 ${0/test.png/expected.png}' {} \;
+
+Then u can checkout another commit and run the tests again (make sure the expected.png still exists), then it will tell you if it spot any differences!
 
 ## Development
 
