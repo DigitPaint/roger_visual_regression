@@ -1,5 +1,3 @@
-require 'roger/test'
-
 module RogerVisualRegression
   class Runner
     def initialize options={}
