@@ -1,11 +1,11 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'roger_visual_regression/version'
+# lib = File.expand_path('../lib', __FILE__)
+# $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+# require '/lib/roger_visual_regression/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "roger_visual_regression"
-  spec.version       = RogerVisualRegression::VERSION
+  spec.version       = "0.1.0"
   spec.authors       = ["Danny Cobussen"]
   spec.email         = ["danny@digitpaint.nl"]
 
@@ -21,15 +21,13 @@ Gem::Specification.new do |spec|
     raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
   end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.files = `git ls-files`.split("\n")
   spec.require_paths = ["lib"]
 
   spec.add_dependency "roger", "~> 0.13", ">= 0.13.0"
   spec.add_dependency "rspec-page-regression", "~> 0.3.0"
   spec.add_dependency "selenium-webdriver"
 
-  spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "thor", ["~> 0"]
 end

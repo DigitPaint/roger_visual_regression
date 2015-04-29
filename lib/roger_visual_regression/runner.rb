@@ -49,4 +49,4 @@ module RogerVisualRegression
   end
 end
 
-Roger::Test.register :visual_regression, RogerVisualRegression::Commands::Runner
+Roger::Test.register :visual_regression, RogerVisualRegression::Runner

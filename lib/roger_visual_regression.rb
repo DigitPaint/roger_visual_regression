@@ -13,5 +13,5 @@ Capybara.javascript_driver = :selenium
 
 # Load modules
 require "roger_visual_regression/version"
-require "roger_visual_regression/initializer"
+require "roger_visual_regression/generator"
 require "roger_visual_regression/runner"

@@ -1,11 +1,3 @@
-module Roger
-  module Cli; end
-end
-
-require 'roger/cli/generate'
-require 'roger/cli/command'
-require 'roger/generators'
-
 module RogerVisualRegression
   class Generator < Roger::Generators::Base
     include Thor::Actions
@@ -80,4 +72,4 @@ module RogerVisualRegression
   end
 end
 
-Roger::Generators.register :visual_regression, RogerVisualRegression::Initializer
+Roger::Generators.register RogerVisualRegression::Generator
