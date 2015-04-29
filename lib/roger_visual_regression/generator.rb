@@ -16,14 +16,8 @@ module RogerVisualRegression
     class_option(
       :spec_path,
       type: :string,
-      default: "specs/",
+      default: "spec/",
       desc: "Path where spec files should be stored"
-    )
-
-    class_option(
-      :html_path,
-      type: :string,
-      desc: "HTML Path where the html files are located"
     )
 
     def call
@@ -69,18 +63,18 @@ module RogerVisualRegression
         spec_file_path = FileUtils.mkpath(options[:spec_path] + File.dirname(html_file)).first
 
         # Create file with content
-        html_file = File.expand_path(File.basename(html_file, File.extname(html_file)))
-        spec_file = (spec_file_path + "/" + File.basename(html_file, ".html") + "_spec.rb")
+        html_file_name = File.dirname(html_file) + File::SEPARATOR + File.basename(html_file, ".erb")
+        spec_file = (spec_file_path + "/" + File.basename(html_file, ".html.erb") + "_spec.rb")
 
         # Add content to the files for base testing
         FileUtils.touch(spec_file)
         open(spec_file, 'a') do |f|
           f << "describe \"Base test for #{original_file_path}\", :type => :feature, :js => true do\n"
           f << "  before(:each) do\n"
-          f << "    visit \"http://localhost:#{@project.server.server_options[:Port]}#{html_file}\"\n"
+          f << "    visit \"http://localhost:#{@project.server.server_options[:Port]}#{html_file_name}\"\n"
           f << "    sleep 2\n"
           f << "  end\n"
-          f << "  it { page.should match_expectation } \n"
+          f << "  it { expect(page).to match_expectation } \n"
           f << "end"
         end
 
