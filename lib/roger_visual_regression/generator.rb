@@ -1,3 +1,13 @@
+# <- hekje
+module Roger
+  # <- hekje
+  module Cli; end
+end
+
+require "roger/cli/generate"
+require "roger/cli/command"
+require "roger/generators"
+
 module RogerVisualRegression
   class Generator < Roger::Generators::Base
     include Thor::Actions
